@@ -8,7 +8,7 @@ var interval = setInterval(function() {
                 .then(checkChildren);
         }
     });
-}, 60000);
+}, 10000);
 
 function parseJson(res) {
     return res.json();
@@ -63,6 +63,13 @@ function checkForKeywords(posts) {
 
         if (count > 0) {
             chrome.browserAction.setBadgeText({text: count.toString()});
+			var opt = {
+				type: "basic",
+				title: "new post",
+				message: count.toString() + " new posts since your last visit",
+				iconurl: "img/reddit_red.png"
+			}
+			chrome.notifications.create(opt);
         } else {
             chrome.browserAction.setBadgeText({text: ""});
         }
