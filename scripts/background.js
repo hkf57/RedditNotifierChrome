@@ -23,7 +23,9 @@ function checkChildren(data) {
 }
 
 function setLastCreated(data) {
-    chrome.storage.sync.set({last: data});
+    chrome.storage.sync.set({
+        last: data
+    });
 }
 
 function findLastCreated(data, created) {
@@ -62,16 +64,25 @@ function checkForKeywords(posts) {
         }
 
         if (count > 0) {
-            chrome.browserAction.setBadgeText({text: count.toString()});
-			var opt = {
-				type: "basic",
-				title: "new post",
-				message: count.toString() + " new posts since your last visit",
-				iconUrl: "img/reddit_red.png"
-			}
-			chrome.notifications.create(opt);
+            chrome.browserAction.setBadgeText({
+                text: count.toString()
+            });
+            var opt = {
+                type: "basic",
+                title: "new post",
+                message: count.toString() + " new posts since your last visit",
+                iconUrl: "img/reddit_red.png"
+            }
+            chrome.notifications.create(opt);
         } else {
-            chrome.browserAction.setBadgeText({text: ""});
+            chrome.browserAction.getBadgeText({}, function(result) {
+                if (result == "") {
+                    chrome.browserAction.setBadgeText({
+                        text: ""
+                    })
+                }
+            });
+
         }
     });
 }
