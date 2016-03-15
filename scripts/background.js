@@ -71,7 +71,7 @@ function checkForKeywords(posts) {
                 type: "basic",
                 title: "new post",
                 message: count.toString() + " new posts since your last visit",
-                iconUrl: "img/reddit_red.png"
+                iconUrl: "img/blank.png"
             }
             chrome.notifications.create(opt);
         } else {
